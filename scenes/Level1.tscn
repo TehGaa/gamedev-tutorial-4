@@ -1,6 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://yqmk0vpvnyxr"]
+[gd_scene load_steps=9 format=4 uid="uid://yqmk0vpvnyxr"]
 
 [ext_resource type="PackedScene" uid="uid://bc2fujtl13g10" path="res://scenes/Player.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://cluh2ekc38ktx" path="res://assets/kenney_platformerpack/Spritesheets/spritesheet_gr_dirt.png" id="2_b64co"]
+[ext_resource type="Texture2D" uid="uid://chgqimvh7rdh6" path="res://assets/Familiar Looking Rocket.png" id="3_nyaak"]
+[ext_resource type="PackedScene" uid="uid://di8pps0plmn1r" path="res://scenes/AreaTrigger.tscn" id="4_i0yux"]
+[ext_resource type="Script" path="res://scenes/Spawner.gd" id="5_42exr"]
+[ext_resource type="PackedScene" uid="uid://6efwccgsjhq" path="res://scenes/FallingFish.tscn" id="6_iyjha"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tkljy"]
+texture = ExtResource("2_b64co")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 18.25, 64, -64, 64, -64, -3)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 18.25, 64, -64, 64, -64, -3)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 21.25, 59, -30.75, 36.5, -64, 6.5)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -4, 39.25, 36, -14.75, 58, -64, 64)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -4, 64, 64, 15.75, 32.5, -64, -21)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -20, 33.25, -1, -6.75, 28, -64, 64)
+7:0/0 = 0
+8:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -20, 64, 9.5, 2.75, 9, -64, 10)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -20, 64, 9.5, 2.75, 9, -64, 10)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -20, 64, 9.5, 2.75, 9, -64, 10)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -20, 64, 9.5, 2.75, 9, -64, 10)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, 64, 5.75, 64, -64, 64)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, -64, 64, 64, 5.75, 64, -64, 64)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, -64, 64, 64, 5.75, 64, -64, 64, -64, -64)
+7:1/0 = 0
+8:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2itat"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_tkljy")
 
 [node name="Level1" type="Node2D"]
 
@@ -8,3 +54,26 @@
 position = Vector2(445, 209)
 collision_layer = 3
 collision_mask = 3
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAACAAIAAAABAAAAAAADAAIAAAABAAAAAAAEAAIAAAABAAAAAAAFAAIAAAAEAAEAAAAGAAMAAAAEAAEAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAHAAQAAAAEAAEAAAAGAAQAAAABAAAAAAAJAAUAAAADAAAAAAAKAAUAAAAEAAAAAAANAAUAAAAEAAAAAAAMAAUAAAADAAAAAAAPAAQAAAAFAAEAAAAQAAMAAAAFAAEAAAAQAAQAAAABAAAAAAARAAMAAAABAAAAAAARAAQAAAABAAAAAAARAAIAAAAFAAEAAAASAAIAAAABAAAAAAATAAIAAAABAAAAAAAUAAIAAAABAAAAAAA=")
+tile_set = SubResource("TileSet_2itat")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2539, 15)
+texture = ExtResource("3_nyaak")
+
+[node name="Area2D" parent="Sprite2D" instance=ExtResource("4_i0yux")]
+position = Vector2(-122.63, -222.25)
+scale = Vector2(1.2, 1.2)
+sceneName = "WinScreen"
+
+[node name="Area2D" parent="." instance=ExtResource("4_i0yux")]
+position = Vector2(0, 1000)
+scale = Vector2(100, 1)
+sceneName = "LoseScreen"
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(1253, 6)
+script = ExtResource("5_42exr")
+obstacle = ExtResource("6_iyjha")
