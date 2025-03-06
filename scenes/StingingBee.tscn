@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccytrni6j74pv"]
+
+[ext_resource type="Texture2D" uid="uid://cmlt5c4ma3gsq" path="res://assets/kenney_platformerpack/PNG/Enemies/bee.png" id="1_lpsn0"]
+[ext_resource type="Script" path="res://scenes/FallingFish.gd" id="2_rw5hy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_emth4"]
+radius = 36.0
+height = 112.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jbt1q"]
+radius = 70.0
+height = 142.0
+
+[node name="StingingBee" type="RigidBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_emth4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lpsn0")
+
+[node name="StingingBeeArea" type="Area2D" parent="."]
+script = ExtResource("2_rw5hy")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StingingBeeArea"]
+position = Vector2(-2, -1)
+shape = SubResource("CapsuleShape2D_jbt1q")
+
+[connection signal="body_entered" from="StingingBeeArea" to="StingingBeeArea" method="_on_FallArea_body_entered"]

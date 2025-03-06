@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var jump_speed: int = -400
 
 
+
 func get_input():
 	velocity.x = 0
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
@@ -22,6 +23,7 @@ func _physics_process(delta):
 
 
 func _process(_delta):
+	
 	if not is_on_floor():
 		$Animator.play("Jump")
 	elif velocity.x != 0:
